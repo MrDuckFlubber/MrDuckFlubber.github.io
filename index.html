@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlobalTime — World Clock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🌍</span>
+        <span class="logo-text">GlobalTime</span>
+      </div>
+      <nav class="header-nav">
+        <button class="nav-btn active" data-view="clocks">Clocks</button>
+        <button class="nav-btn" data-view="converter">Converter</button>
+      </nav>
+      <div class="header-actions">
+        <div class="toggle-wrap">
+          <span class="toggle-label-text">24H</span>
+          <label class="toggle-switch" title="Toggle 24-hour time">
+            <input type="checkbox" id="toggle24h" />
+            <div class="toggle-track">
+              <div class="toggle-thumb"></div>
+            </div>
+          </label>
+        </div>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+          <span class="theme-icon">☀️</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- VIEW: CLOCKS -->
+    <section class="view active" id="view-clocks">
+      <div class="clocks-toolbar">
+        <div class="add-city-row">
+          <div class="select-wrapper">
+            <select id="citySelect" class="city-select">
+              <option value="">— Add a city —</option>
+            </select>
+          </div>
+          <button class="btn-add" id="addCityBtn">＋ Add</button>
+        </div>
+        <div class="toolbar-right">
+          <button class="btn-ghost" id="clearAllBtn">Clear All</button>
+          <div class="sort-wrap">
+            <button class="btn-ghost" id="sortBtn">↕ Sort</button>
+            <div class="sort-dropdown" id="sortDropdown">
+              <button class="sort-option" data-sort="alpha-asc">A → Z</button>
+              <button class="sort-option" data-sort="alpha-desc">Z → A</button>
+              <button class="sort-option" data-sort="utc-asc">UTC East → West</button>
+              <button class="sort-option" data-sort="utc-desc">UTC West → East</button>
+              <button class="sort-option" data-sort="custom">Original order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clocks-grid" id="clocksGrid">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">🕐</div>
+          <p>Add cities to start tracking time</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: CONVERTER -->
+    <section class="view" id="view-converter">
+      <div class="converter-layout-new">
+        <div class="converter-top">
+          <div class="converter-form-new">
+            <h2 class="section-title">Time Zone Converter</h2>
+            <p class="section-sub">Compare times between any two cities with draggable sliders.</p>
+            <div class="city-search-row">
+              <div class="city-search-group">
+                <label>Your city</label>
+                <div class="search-input-wrap">
+                  <input type="text" id="sourceSearchInput" class="form-input" placeholder="Search city…" autocomplete="off" />
+                  <div class="search-dropdown" id="sourceDropdown"></div>
+                </div>
+              </div>
+              <div class="city-vs">⇄</div>
+              <div class="city-search-group">
+                <label>Target city</label>
+                <div class="search-input-wrap">
+                  <input type="text" id="targetSearchInput" class="form-input" placeholder="Search city…" autocomplete="off" />
+                  <div class="search-dropdown" id="targetDropdown"></div>
+                </div>
+              </div>
+              <button class="btn-primary" id="convertBtn" style="align-self:flex-end">Update</button>
+            </div>
+          </div>
+        </div>
+        <div id="converterResults" class="converter-results-new">
+          <div class="results-placeholder">
+            <span>🌐</span>
+            <p>Select two cities to compare times</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- JS modules: load order matters (data → utils → clocks → converter → app) -->
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/clocks.js"></script>
+  <script src="js/converter.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
